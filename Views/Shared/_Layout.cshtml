@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ThePlayfulPawn.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/dark-mode.css" asp-append-version="true" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
@@ -16,7 +15,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary border fixed-top eagle-lake-regular">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom fixed-top eagle-lake-regular" id="navbar-top">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-action="Index">The Playful Pawn</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -30,37 +29,16 @@
                             <a class="nav-link" aria-current="page" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            @* <a class="nav-link disabled" aria-disabled="true">Privacy</a> *@
                             <a class="nav-link" aria-current="page" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                     <button class="d-flex" id="dark-mode-toggle">
-                        <!--Moon is an inline SVG so you can edit the color if needed-->
-                        <svg class="cs-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" style="enable-background:new 0 0 480 480" xml:space="preserve"><path d="M459.782 347.328c-4.288-5.28-11.488-7.232-17.824-4.96-17.76 6.368-37.024 9.632-57.312 9.632-97.056 0-176-78.976-176-176 0-58.4 28.832-112.768 77.12-145.472 5.472-3.712 8.096-10.4 6.624-16.832S285.638 2.4 279.078 1.44C271.59.352 264.134 0 256.646 0c-132.352 0-240 107.648-240 240s107.648 240 240 240c84 0 160.416-42.688 204.352-114.176 3.552-5.792 3.04-13.184-1.216-18.496z"/></svg>
+                        @* TODO: Add a button here that can switch between dark and light mode *@
                         <img class="cs-sun" aria-hidden="true" src="https://csimg.nyc3.digitaloceanspaces.com/Contact-Page/sun.svg" decoding="async" alt="sun" width="15" height="15">
                     </button>
                 </div>
             </div>
         </nav>
-        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid eagle-lake-regular">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">The Playful Pawn</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> *@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
