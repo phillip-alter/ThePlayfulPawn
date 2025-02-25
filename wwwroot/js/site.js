@@ -3,6 +3,8 @@
 
 // Write your JavaScript code.
 
+// Dark mode code source: https://oakharborwebdesigns.com/blog/how-to-add-dark-mode-to-your-website/
+
 function enableDarkMode() {
     document.body.classList.add('dark-mode');
     localStorage.setItem('theme', 'dark');

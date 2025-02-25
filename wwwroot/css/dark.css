@@ -1,6 +1,9 @@
 /*-- -------------------------- -->
 <---      Core Dark Styles      -->
-<--- -------------------------- -*/
+<--- -------------------------- -
+
+SOURCE OF CODE: https://oakharborwebdesigns.com/blog/how-to-add-dark-mode-to-your-website/
+*/
 /* Mobile */
 @media only screen and (min-width: 0rem) {
     :root {
