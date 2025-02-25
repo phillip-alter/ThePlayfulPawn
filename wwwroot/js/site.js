@@ -7,10 +7,12 @@
 
 function enableDarkMode() {
     document.body.classList.add('dark-mode');
+    document.getElementById('navbar-top').classList.add('bg-dark');
     localStorage.setItem('theme', 'dark');
 }
 function disableDarkMode() {
     document.body.classList.remove('dark-mode');
+    document.getElementById('navbar-top').classList.remove('bg-dark');
     localStorage.setItem('theme', 'light');
 }
 
@@ -18,7 +20,6 @@ function disableDarkMode() {
 function detectColorScheme() {
     // default to the light theme
     let theme = 'light';
-
     // check localStorage for a saved 'theme' variable. if it's there, the user has visited before, so apply the necessary theme choices
     if (localStorage.getItem('theme')) {
         theme = localStorage.getItem('theme');
@@ -27,7 +28,6 @@ function detectColorScheme() {
     else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         theme = 'dark';
     }
-
     // if there is no preference set, the default of light will be used. apply accordingly
     theme === 'dark' ? enableDarkMode() : disableDarkMode();
 }
