@@ -18,5 +18,20 @@ html {
 }
 
 body {
+  padding-top: 56px;
   margin-bottom: 60px;
+}
+
+body.dark-mode .targetElement {
+  background: #000000;
+}
+
+.eagle-lake-regular {
+  font-family: "Eagle Lake", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.navbar {
+  background-color: #fff;
 }
