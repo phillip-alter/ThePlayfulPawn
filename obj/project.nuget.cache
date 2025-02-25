@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "6AeSGyxtWeE=",
+  "dgSpecHash": "iQsK75+FwQU=",
   "success": true,
   "projectFilePath": "/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/ThePlayfulPawn.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/phillipalter/.nuget/packages/microsoft.netcore.app.ref/8.0.13/microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
+    "/Users/phillipalter/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512",
+    "/Users/phillipalter/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.13/microsoft.netcore.app.host.osx-arm64.8.0.13.nupkg.sha512"
+  ],
   "logs": []
 }
