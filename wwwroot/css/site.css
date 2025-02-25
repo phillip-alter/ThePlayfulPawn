@@ -23,7 +23,13 @@ body {
 }
 
 body.dark-mode .targetElement {
-  background: #000000;
+  color: #fff;
+  background-color: #222;
+}
+
+.dark-mode {
+  color: #fff;
+  background-color: #222222;
 }
 
 .eagle-lake-regular {
