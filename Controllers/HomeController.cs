@@ -18,6 +18,21 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult BGSearch()
+    {
+        return View();
+    }
+
+    public IActionResult Admin()
+    {
+        return View();
+    }
+
+    public IActionResult Reservations()
+    {
+        return View();
+    }
+
     public IActionResult Privacy()
     {
         return View();
