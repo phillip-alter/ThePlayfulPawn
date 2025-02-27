@@ -31,26 +31,7 @@ public class HomeController : Controller
     public IActionResult BGSearch(string? inputBGName, int? inputPlayerCount)
     {
         BGSearchModel model = new BGSearchModel(inputBGName, inputPlayerCount, _context);
-        // if (inputBGName != null && inputPlayerCount != null)
-        // {
-        //     Debug.WriteLine("Inside if statement BGSearch");
-        //     model.searchGameName(inputBGName);
-        //     model.searchGamePlayers(inputPlayerCount);
-        // }
-        // else 
-        if (!inputBGName.IsNullOrEmpty())
-        {
-            Debug.WriteLine("Inside if statement BGSearch");
-            model.searchGameName(inputBGName);
-        }
-        else if (inputPlayerCount != null)
-        {
-            Debug.WriteLine("Inside else if statemen BGSearch");
-            model.searchGamePlayers(inputPlayerCount);
-        } else {
-            model.Games = _context.Games.ToList();
-        }
-
+        model.Search();
         return View("BGSearch", model);
     }
 
