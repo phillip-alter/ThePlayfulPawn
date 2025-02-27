@@ -1,16 +1,18 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ThePlayfulPawn.Models;
+using ThePlayfulPawn.Data;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ThePlayfulPawn.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly PawnDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(PawnDbContext context)
     {
-        _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
@@ -18,9 +20,38 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet]
     public IActionResult BGSearch()
     {
-        return View();
+        BGSearchModel model = new BGSearchModel(null, null, _context);
+        return View(model);
+    }
+
+    [HttpPost]
+    public IActionResult BGSearch(string? inputBGName, int? inputPlayerCount)
+    {
+        BGSearchModel model = new BGSearchModel(inputBGName, inputPlayerCount, _context);
+        // if (inputBGName != null && inputPlayerCount != null)
+        // {
+        //     Debug.WriteLine("Inside if statement BGSearch");
+        //     model.searchGameName(inputBGName);
+        //     model.searchGamePlayers(inputPlayerCount);
+        // }
+        // else 
+        if (!inputBGName.IsNullOrEmpty())
+        {
+            Debug.WriteLine("Inside if statement BGSearch");
+            model.searchGameName(inputBGName);
+        }
+        else if (inputPlayerCount != null)
+        {
+            Debug.WriteLine("Inside else if statemen BGSearch");
+            model.searchGamePlayers(inputPlayerCount);
+        } else {
+            model.Games = _context.Games.ToList();
+        }
+
+        return View("BGSearch", model);
     }
 
     public IActionResult Admin()
