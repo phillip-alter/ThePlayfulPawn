@@ -1,18 +1,20 @@
 @{
     ViewData["Title"] = "Board Game Search";
 }
+@model BGSearchModel
+
 <div>
     <h1 class="mt-2">Board Game Search</h1>
 </div>
-<form class="row g-3 mt-2">
+<form class="row g-3 mt-2" method="post">
   <div class="col-md-3">
-    <input type="text" class="form-control" id="inputBGName" placeholder="Board Game Name">
+    <input type="text" class="form-control" id="inputBGName" placeholder="Board Game Name" asp-for="InputBGName">
   </div>
-  <div class="col-md-3">
+  @* <div class="col-md-3">
     <input type="text" class="form-control" id="inputBGVendor" placeholder="Publisher">
-  </div>
+  </div> *@
   <div class="col-md-2">
-    <input type="number" class="form-control" id="inputPlayerCount" placeholder="Max Players" min="1" max="12">
+    <input type="number" class="form-control" id="inputPlayerCount" placeholder="Max Players" min="1" max="12" asp-for="InputPlayerCount">
   </div>
   <div class="col-12">
     <button type="search" class="btn btn-primary" method="post">Search</button>
@@ -27,9 +29,9 @@
         <th>
             Description
         </th>
-        <th>
+        @* <th>
             Publisher
-        </th>
+        </th> *@
         <th>
             Max Players
         </th>
@@ -38,9 +40,9 @@
         </th>
     </thead>
     @* Temporary code until the class for the board games db stuff is set up *@
-    @* <tbody>
+    <tbody>
         @{
-            foreach (game in @Model.Games)
+            foreach (var game in @Model.Games)
             {
                 <tr>
                     <td>
@@ -49,11 +51,11 @@
                     <td>
                         @game.Description
                     </td>
-                    <td>
+                    @* <td>
                         @game.Publisher
-                    </td>
+                    </td> *@
                     <td>
-                        @game.MaxPlayers
+                        @game.MaxPlayerCount
                     </td>
                     <td>
                         @game.Price.ToString("C")
@@ -61,5 +63,5 @@
                 </tr>
             }
         }
-    </tbody> *@
+    </tbody>
 </table>
