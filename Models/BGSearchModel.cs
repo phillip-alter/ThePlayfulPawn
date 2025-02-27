@@ -38,5 +38,13 @@ namespace ThePlayfulPawn.Models
             }
             Games = games;
         }
+        public void searchNamePlayers (int? searchTerm1, string? searchTerm2){
+            List<Game> games = new List<Game>();
+            games = _context.Games.Where(g => g.MaxPlayerCount <= searchTerm1).ToList();
+#pragma warning disable CS8604 // Possible null reference argument.
+            games = games.Where(g => g.GameName.Contains(searchTerm2)).ToList();
+#pragma warning restore CS8604 // Possible null reference argument.
+            Games = games;
+        }
     }
 }
