@@ -7,13 +7,10 @@
     <h1 class="mt-2">Board Game Search</h1>
 </div>
 <form class="row g-3 mt-2" method="post">
-  <div class="col-md-3">
+  <div class="col-md-6">
     <input type="text" class="form-control" id="inputBGName" placeholder="Board Game Name" asp-for="InputBGName">
   </div>
-  @* <div class="col-md-3">
-    <input type="text" class="form-control" id="inputBGVendor" placeholder="Publisher">
-  </div> *@
-  <div class="col-md-2">
+  <div class="col-md-6">
     <input type="number" class="form-control" id="inputPlayerCount" placeholder="Max Players" min="1" max="12" asp-for="InputPlayerCount">
   </div>
   <div class="col-12">
@@ -29,9 +26,9 @@
         <th>
             Description
         </th>
-        @* <th>
+        <th>
             Publisher
-        </th> *@
+        </th>
         <th>
             Max Players
         </th>
@@ -39,7 +36,6 @@
             Price
         </th>
     </thead>
-    @* Temporary code until the class for the board games db stuff is set up *@
     <tbody>
         @{
             foreach (var game in @Model.Games)
@@ -51,9 +47,9 @@
                     <td>
                         @game.Description
                     </td>
-                    @* <td>
-                        @game.Publisher
-                    </td> *@
+                    <td>
+                        @Model.Vendors.FirstOrDefault(v => v.VendorId == game.VendorId)?.VendorName 
+                    </td>
                     <td>
                         @game.MaxPlayerCount
                     </td>
