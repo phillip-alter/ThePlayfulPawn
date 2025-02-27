@@ -1,50 +1,44 @@
 using ThePlayfulPawn.Data;
 using System.Linq;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ThePlayfulPawn.Models
 {
-    public class BGSearchModel
-    {
-        public string? InputBGName { get; set; }
-        // public string? InputBGVendor { get; set; }
-        public int? InputPlayerCount { get; set; }
-        private PawnDbContext _context { get; }
-        public IEnumerable<Game> Games { get; set; } = new List<Game>();
-
-        public BGSearchModel(string? inputBGName, int? inputPlayerCount, PawnDbContext context)
+        public class BGSearchModel
         {
-            InputBGName = inputBGName;
-            //InputBGVendor = inputBGVendor;
-            InputPlayerCount = inputPlayerCount;
-            _context = context;
-        }
-        
-        public void searchGameName(string? searchTerm){
-            List<Game> games = new List<Game>();
-            if (string.IsNullOrEmpty(searchTerm)){
-                games = _context.Games.ToList();
-            } else {
-                games = _context.Games.Where(g => g.GameName.Contains(searchTerm)).ToList();
-            }
-            Games = games;
-        }
+            public string? InputBGName { get; set; } = string.Empty;
+            public int? InputPlayerCount { get; set; }
+            private PawnDbContext _context { get; }
+            public IEnumerable<Game> Games { get; set; } = new List<Game>();
+            public IEnumerable<Vendor> Vendors { get; set; } = new List<Vendor>();
 
-        public void searchGamePlayers (int? searchTerm){
-            List<Game> games = new List<Game>();
-            if (searchTerm == null){
-                games = _context.Games.ToList();
-            } else {
-                games = _context.Games.Where(g => g.MaxPlayerCount <= searchTerm).ToList();
+            public BGSearchModel(string? inputBGName, int? inputPlayerCount, PawnDbContext context)
+            {
+                InputBGName = inputBGName;
+                InputPlayerCount = inputPlayerCount;
+                _context = context;
             }
-            Games = games;
-        }
-        public void searchNamePlayers (int? searchTerm1, string? searchTerm2){
-            List<Game> games = new List<Game>();
-            games = _context.Games.Where(g => g.MaxPlayerCount <= searchTerm1).ToList();
-#pragma warning disable CS8604 // Possible null reference argument.
-            games = games.Where(g => g.GameName.Contains(searchTerm2)).ToList();
-#pragma warning restore CS8604 // Possible null reference argument.
-            Games = games;
-        }
+
+            public void Search()
+            {
+                var query = _context.Games
+                    .Join(
+                        _context.Vendors,
+                        game => game.VendorId,
+                        vendor => vendor.VendorId,
+                        (game, vendor) => new { Game = game, VendorName = vendor.VendorName }
+                    );
+                if (!InputBGName.IsNullOrEmpty())
+                {
+                    query = query.Where(g => g.Game.GameName.Contains(InputBGName));
+                }
+
+                if (InputPlayerCount.HasValue)
+                {
+                    query = query.Where(g => g.Game.MaxPlayerCount <= InputPlayerCount);
+                }
+                Games = query.Select(x => x.Game).ToList();
+                Vendors = query.Select(x => new Vendor { VendorName = x.VendorName, VendorId = x.Game.VendorId }).ToList(); // Include VendorId
+            }
     }
 }
