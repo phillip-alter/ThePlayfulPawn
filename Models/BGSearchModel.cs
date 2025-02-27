@@ -30,8 +30,10 @@ namespace ThePlayfulPawn.Models
                     );
                 if (!InputBGName.IsNullOrEmpty())
                 {
-                    query = query.Where(g => g.Game.GameName.Contains(InputBGName));
-                }
+#pragma warning disable CS8604 // Possible null reference argument.
+                query = query.Where(g => g.Game.GameName.Contains(InputBGName));
+#pragma warning restore CS8604 // Possible null reference argument.
+            }
 
                 if (InputPlayerCount.HasValue)
                 {
