@@ -8,11 +8,23 @@
 function enableDarkMode() {
     document.body.classList.add('dark-mode');
     document.getElementById('navbar-top').classList.add('bg-dark');
+    let elements = document.getElementsByClassName('table-light');
+    // when you remove the table-light class from an element, it will remove the FIRST element with that class. so we need
+    // to loop through until there are no more elements with that class, hence why [0]
+    while (elements.length > 0) {
+        elements[0].classList.add('table-dark');
+        elements[0].classList.remove('table-light');
+    }
     localStorage.setItem('theme', 'dark');
 }
 function disableDarkMode() {
     document.body.classList.remove('dark-mode');
     document.getElementById('navbar-top').classList.remove('bg-dark');
+    let elements = document.getElementsByClassName('table-dark');
+    while (elements.length > 0) { 
+        elements[0].classList.add('table-light');
+        elements[0].classList.remove('table-dark');
+    }
     localStorage.setItem('theme', 'light');
 }
 
