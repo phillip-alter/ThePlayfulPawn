@@ -35,7 +35,14 @@ public class HomeController : Controller
         return View("BGSearch", model);
     }
 
+    [HttpGet]
     public IActionResult Admin()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Admin(string name)
     {
         return View();
     }

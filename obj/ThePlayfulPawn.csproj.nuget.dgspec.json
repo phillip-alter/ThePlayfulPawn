@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/ThePlayfulPawn.csproj": {}
+    "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj": {}
   },
   "projects": {
-    "/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/ThePlayfulPawn.csproj": {
+    "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/ThePlayfulPawn.csproj",
+        "projectUniqueName": "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj",
         "projectName": "ThePlayfulPawn",
-        "projectPath": "/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/ThePlayfulPawn.csproj",
-        "packagesPath": "/Users/phillipalter/.nuget/packages/",
-        "outputPath": "/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/obj/",
+        "projectPath": "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj",
+        "packagesPath": "C:\\Users\\bubba\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/phillipalter/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\bubba\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,8 +37,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -67,20 +65,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.osx-arm64",
-              "version": "[8.0.13, 8.0.13]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -89,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
