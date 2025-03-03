@@ -38,13 +38,18 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Admin()
     {
+        
         return View();
     }
 
     [HttpPost]
-    public IActionResult Admin(string name)
+    public IActionResult Admin(string firstName, string lastName)
     {
-        return View();
+        var customers = _context.Customers
+            .Where(x => x.FirstName == firstName && x.LastName == lastName)
+            .ToList();
+
+        return View("Customers", customers);
     }
 
     public IActionResult Reservations()
