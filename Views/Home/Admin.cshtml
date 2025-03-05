@@ -2,6 +2,9 @@
     ViewData["Title"] = "Admin Page";
 }
 
+@using System.Linq
+@using ThePlayfulPawn.Data
+
 <div>
     <h1 class="mt-2">Customer and Address Search</h1>
 </div>
@@ -42,23 +45,6 @@
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var customer in Model.Customers)
-        {
-            <tr>
-                <td>@customer.FirstName</td>
-                <td>@customer.LastName</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<h2>Addresses</h2>
-<table class="table table-dark table-striped table-bordered">
-    <thead>
-        <tr>
             <th>Line1</th>
             <th>Line2</th>
             <th>City</th>
@@ -68,15 +54,27 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var address in Model.Addresses)
+        @foreach (var customer in Model.Customers)
         {
+            Address address = null;
+            foreach (var addr in Model.Addresses)
+            {
+                if (addr.AddressId == customer.AddressId)
+                {
+                    address = addr;
+                    break;
+                }
+            }
+
             <tr>
-                <td>@address.Line1</td>
-                <td>@address.Line2</td>
-                <td>@address.City</td>
-                <td>@address.State</td>
-                <td>@address.ZipCode</td>
-                <td>@address.Phone</td>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@address?.Line1</td>
+                <td>@address?.Line2</td>
+                <td>@address?.City</td>
+                <td>@address?.State</td>
+                <td>@address?.ZipCode</td>
+                <td>@address?.Phone</td>
             </tr>
         }
     </tbody>

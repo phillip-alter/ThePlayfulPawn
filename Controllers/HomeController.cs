@@ -35,79 +35,73 @@ public class HomeController : Controller
         return View("BGSearch", model);
     }
 
+
+
+
+
     [HttpGet]
     public IActionResult Admin(string firstName, string lastName, string Line1, string Line2, string State, string City, int? ZipCode, string Phone)
     {
         AdminModel model = new AdminModel(_context);
 
-        // Only filter and load customers if search parameters are provided
-        if (!string.IsNullOrEmpty(firstName) ||
-             !string.IsNullOrEmpty(lastName) ||
-                !string.IsNullOrEmpty(Line1) ||
-                !string.IsNullOrEmpty(Line2) ||
-                !string.IsNullOrEmpty(State) ||
-                !string.IsNullOrEmpty(City)  ||
-                !string.IsNullOrEmpty(Phone))
-        {
-            if (!string.IsNullOrEmpty(firstName))
-            {
-                model.Customers = model.Customers
-                    .Where(x => x.FirstName.ToLower() == firstName.ToLower())
-                    .ToList();
-            }
-            if (!string.IsNullOrEmpty(lastName))
-            {
-                model.Customers = model.Customers
-                    .Where(x => x.LastName.ToLower() == lastName.ToLower())
-                    .ToList();
-            }
-            if (!string.IsNullOrEmpty(Line1))
-            {
-                model.Addresses = model.Addresses
-                    .Where(x => x.Line1.ToLower() == Line1.ToLower())
-                    .ToList();
-            }
-            if (!string.IsNullOrEmpty(Line2))
-            {
-                model.Addresses = model.Addresses
-                    .Where(x => x.Line2.ToLower() == Line2.ToLower())
-                    .ToList();
-            }
-            if (!string.IsNullOrEmpty(State))
-            {
-                model.Addresses = model.Addresses
-                    .Where(x => x.State.ToLower() == State.ToLower())
-                    .ToList();
-            }
-            if (!string.IsNullOrEmpty(City))
-            {
-                model.Addresses = model.Addresses
-                    .Where(x => x.City.ToLower() == City.ToLower())
-                    .ToList();
-            }
-            if (ZipCode.HasValue) // Check if ZipCode has a value
-            {
-                model.Addresses = model.Addresses
-                    .Where(x => x.ZipCode == ZipCode.Value) // Filter by the integer value
-                    .ToList();
-            }
-            if (!string.IsNullOrEmpty(Phone))
-            {
-                model.Addresses = model.Addresses
-                    .Where(x => x.Phone.ToLower() == Phone.ToLower())
-                    .ToList();
-            }
+        // Perform the join and filtering
+        var query = _context.Customers.Join(
+            _context.Addresses,
+            customer => customer.AddressId, // Assuming AddressId is the foreign key in Customer
+            address => address.AddressId,
+            (customer, address) => new { Customer = customer, Address = address });
 
-        }
-        else
+        // Apply filters
+        if (!string.IsNullOrEmpty(firstName))
         {
-            //ensure the model.Customers list is empty upon initial page load.
-            model.Customers = new List<Customer>();
-            model.Addresses = new List<Address>();
+            query = query.Where(x => x.Customer.FirstName.ToLower() == firstName.ToLower());
         }
+        if (!string.IsNullOrEmpty(lastName))
+        {
+            query = query.Where(x => x.Customer.LastName.ToLower() == lastName.ToLower());
+        }
+        if (!string.IsNullOrEmpty(Line1))
+        {
+            query = query.Where(x => x.Address.Line1.ToLower() == Line1.ToLower());
+        }
+        if (!string.IsNullOrEmpty(Line2))
+        {
+            query = query.Where(x => x.Address.Line2.ToLower() == Line2.ToLower());
+        }
+        if (!string.IsNullOrEmpty(State))
+        {
+            query = query.Where(x => x.Address.State.ToLower() == State.ToLower());
+        }
+        if (!string.IsNullOrEmpty(City))
+        {
+            query = query.Where(x => x.Address.City.ToLower() == City.ToLower());
+        }
+        if (ZipCode.HasValue)
+        {
+            query = query.Where(x => x.Address.ZipCode == ZipCode.Value);
+        }
+        if (!string.IsNullOrEmpty(Phone))
+        {
+            query = query.Where(x => x.Address.Phone.ToLower() == Phone.ToLower());
+        }
+
+        // Project the results into Customer objects with the associated Address
+        var results = query.Select(x => x.Customer).ToList();
+
+        if (string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(Line1) && string.IsNullOrEmpty(Line2) && string.IsNullOrEmpty(State) && string.IsNullOrEmpty(City) && !ZipCode.HasValue && string.IsNullOrEmpty(Phone))
+        {
+            results = new List<Customer>();
+        }
+
+        model.Customers = results;
 
         return View("Admin", model);
     }
+
+
+
+
+
 
     public IActionResult Reservations()
     {
