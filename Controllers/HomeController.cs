@@ -155,6 +155,176 @@ public class HomeController : Controller
 
 
 
+    #region Customer CRUD
+
+    [HttpGet]
+    public IActionResult AddCustomer()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddCustomer(Customer customer, Address address)
+    {
+        _context.Addresses.Add(address);
+        _context.SaveChanges();
+
+        customer.AddressId = address.AddressId;
+        _context.Customers.Add(customer);
+        _context.SaveChanges();
+
+        return RedirectToAction("Admin");
+    }
+
+    [HttpGet]
+    public IActionResult EditCustomer(int id)
+    {
+        var customer = _context.Customers.Find(id);
+        var address = _context.Addresses.Find(customer.AddressId);
+
+        if (customer == null || address == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.Address = address;
+        return View(customer);
+    }
+
+    [HttpPost]
+    public IActionResult EditCustomer(Customer customer, Address address)
+    {
+        _context.Addresses.Update(address);
+        _context.Customers.Update(customer);
+        _context.SaveChanges();
+
+        return RedirectToAction("Admin");
+    }
+
+    [HttpGet]
+    public IActionResult DeleteCustomer(int id)
+    {
+        var customer = _context.Customers.Find(id);
+        if (customer == null)
+        {
+            return NotFound();
+        }
+        var address = _context.Addresses.Find(customer.AddressId);
+
+        _context.Customers.Remove(customer);
+        _context.Addresses.Remove(address);
+
+        _context.SaveChanges();
+        return RedirectToAction("Admin");
+    }
+
+    #endregion
+
+    #region Vendor CRUD
+
+    [HttpGet]
+    public IActionResult AddVendor()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddVendor(Vendor vendor, Address address)
+    {
+        _context.Addresses.Add(address);
+        _context.SaveChanges();
+
+        vendor.VendorAddressID = address.AddressId;
+        _context.Vendors.Add(vendor);
+        _context.SaveChanges();
+
+        return RedirectToAction("Admin");
+    }
+
+    [HttpGet]
+    public IActionResult EditVendor(int id)
+    {
+        var vendor = _context.Vendors.Find(id);
+        var address = _context.Addresses.Find(vendor.VendorAddressID);
+
+        if (vendor == null || address == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.Address = address;
+        return View(vendor);
+    }
+
+    [HttpPost]
+    public IActionResult EditVendor(Vendor vendor, Address address)
+    {
+        _context.Addresses.Update(address);
+        _context.Vendors.Update(vendor);
+        _context.SaveChanges();
+
+        return RedirectToAction("Admin");
+    }
+
+    [HttpGet]
+    public IActionResult DeleteVendor(int id)
+    {
+        var vendor = _context.Vendors.Find(id);
+        if (vendor == null)
+        {
+            return NotFound();
+        }
+        var address = _context.Addresses.Find(vendor.VendorAddressID);
+        if (address == null)
+        {
+            return NotFound();
+        }
+
+        _context.Vendors.Remove(vendor);
+        _context.Addresses.Remove(address);
+
+        _context.SaveChanges();
+        return RedirectToAction("Admin");
+    }
+
+    #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public IActionResult Reservations()
     {

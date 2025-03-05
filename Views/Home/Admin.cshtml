@@ -49,6 +49,7 @@
 </form>
 
 <h2>Customers</h2>
+<a asp-action="AddCustomer" class="btn btn-primary mb-2">Add Customer</a>
 <table class="table table-dark table-striped table-bordered">
     <thead>
         <tr>
@@ -60,6 +61,7 @@
             <th>State</th>
             <th>ZipCode</th>
             <th>Phone</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -74,7 +76,6 @@
                     break;
                 }
             }
-
             <tr>
                 <td>@customer.FirstName</td>
                 <td>@customer.LastName</td>
@@ -84,12 +85,18 @@
                 <td>@address?.State</td>
                 <td>@address?.ZipCode</td>
                 <td>@address?.Phone</td>
+                <td>
+                    <a asp-action="EditCustomer" asp-route-id="@customer.CustomerId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="DeleteCustomer" asp-route-id="@customer.CustomerId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
+
 <h2>Vendors</h2>
+<a asp-action="AddVendor" class="btn btn-primary mb-2">Add Vendor</a>
 <table class="table table-dark table-striped table-bordered">
     <thead>
         <tr>
@@ -102,6 +109,7 @@
             <th>State</th>
             <th>ZipCode</th>
             <th>Phone</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -126,6 +134,10 @@
                 <td>@address?.State</td>
                 <td>@address?.ZipCode</td>
                 <td>@address?.Phone</td>
+                <td>
+                    <a asp-action="EditVendor" asp-route-id="@vendor.VendorId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="DeleteVendor" asp-route-id="@vendor.VendorId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
