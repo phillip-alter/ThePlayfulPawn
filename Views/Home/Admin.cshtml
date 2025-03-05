@@ -23,6 +23,42 @@
   </div>
 </form>
 
-@foreach(var customer in @Model.Customers){
+
+<table class="table table-dark table-striped table-bordered">
+    <thead>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+    </thead>
+    <tbody>
+        @{
+            foreach (var customer in @Model.Customers)
+            {
+                <tr>
+                    <td>
+                        @customer.FirstName
+                    </td>
+                    <td>
+                        @customer.LastName
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+<!-- old display -->
+@* @foreach(var customer in @Model.Customers){
   <p>@customer.FirstName @customer.LastName</p>
-}
+} *@
+
+
+
+
+<div>
+    <h1 class="mt-2">Address Search</h1>
+</div>

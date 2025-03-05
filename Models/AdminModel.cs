@@ -14,11 +14,12 @@ namespace ThePlayfulPawn.Models
         private PawnDbContext _context {get; set;}
 
 
-        //context is the database that we are pulling the information from
+        //context is the database(CreateThePlayfulPawn.sql) that we are pulling the information from about the customer, addresses, vendors, and food.
         public AdminModel(PawnDbContext context)
         {
             _context = context;
             Customers = _context.Customers.ToList();
+            
         }
     }
 }

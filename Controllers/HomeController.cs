@@ -39,22 +39,30 @@ public class HomeController : Controller
     public IActionResult Admin(string firstName, string lastName)
     {
         AdminModel model = new AdminModel(_context);
-        
-        if (firstName != null)
+
+        // Only filter and load customers if search parameters are provided
+        if (!string.IsNullOrEmpty(firstName) || !string.IsNullOrEmpty(lastName))
         {
-            model.Customers = model.Customers
-            .Where(x => x.FirstName.ToLower() == firstName.ToLower())
-            .ToList();
+            if (!string.IsNullOrEmpty(firstName))
+            {
+                model.Customers = model.Customers
+                    .Where(x => x.FirstName.ToLower() == firstName.ToLower())
+                    .ToList();
+            }
+            if (!string.IsNullOrEmpty(lastName))
+            {
+                model.Customers = model.Customers
+                    .Where(x => x.LastName.ToLower() == lastName.ToLower())
+                    .ToList();
+            }
         }
-        if (lastName != null)
+        else
         {
-            model.Customers = model.Customers
-            .Where(x => x.LastName.ToLower() == lastName.ToLower())
-            .ToList();
+            //ensure the model.Customers list is empty upon initial page load.
+            model.Customers = new List<Customer>();
         }
 
-            return View("Admin", model);
-        
+        return View("Admin", model);
     }
 
     public IActionResult Reservations()
