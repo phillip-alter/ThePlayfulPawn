@@ -17,53 +17,51 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ThePlayfulPawn
 build_property.RootNamespace = ThePlayfulPawn
-build_property.ProjectDir = /Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/
+build_property.ProjectDir = C:\Users\julia\OneDrive\Documents\Computer Science\CS 364 Information Management\cs364-group-project-playfulpawn\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn
+build_property.MSBuildProjectDirectory = C:\Users\julia\OneDrive\Documents\Computer Science\CS 364 Information Management\cs364-group-project-playfulpawn
 build_property._RazorSourceGeneratorDebug = 
-build_property.EffectiveAnalysisLevelStyle = 8.0
-build_property.EnableCodeStyleSeverity = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/Home/Admin.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9BZG1pbi5jc2h0bWw=
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/Home/Admin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/Home/BGSearch.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9CR1NlYXJjaC5jc2h0bWw=
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/Home/BGSearch.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCR1NlYXJjaC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/Home/Reservations.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9SZXNlcnZhdGlvbnMuY3NodG1s
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/Home/Reservations.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXNlcnZhdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/phillipalter/Developer/WOUWinter2025/CS364/ThePlayfulPawn/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-avhyply91q
+[C:/Users/julia/OneDrive/Documents/Computer Science/CS 364 Information Management/cs364-group-project-playfulpawn/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ors4nv1rr3
