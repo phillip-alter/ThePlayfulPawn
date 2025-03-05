@@ -1,0 +1,89 @@
+@model ThePlayfulPawn.Models.ReservationsModel
+
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<h1>Reservations</h1>
+
+<!-- Form to search existing reservations (GET) -->
+<form method="get" class="row g-3 mt-2">
+    <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="First Name" name="searchFName" />
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Last Name" name="searchLName" />
+    </div>
+    <div class="col-12 mt-2">
+        <button type="submit" class="btn btn-secondary">Search Reservations</button>
+    </div>
+</form>
+
+<hr />
+
+<!-- Form to search existing reservations by Date (GET) -->
+<form method="get" class="row g-3 mt-2">
+    <div class="col-md-4">
+        <input type="date" class="form-control" placeholder="Reservation Date" name="searchDate" />
+    </div>
+    <div class="col-12 mt-2">
+        <button type="submit" class="btn btn-info">Search by Date</button>
+    </div>
+</form>
+
+<hr />
+
+<!-- Form to add a new reservation (POST) -->
+<form method="post" class="row g-3 mt-2">
+    <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="First Name" name="fname" required />
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Last Name" name="lname" required />
+    </div>
+    <div class="col-md-4">
+        <input type="number" class="form-control" placeholder="Group Size" name="grouptotal" min="1" required />
+    </div>
+    <div class="col-md-4 mt-2">
+        <input type="datetime-local" class="form-control" name="datetime" required />
+    </div>
+    <div class="col-12 mt-2">
+        <button type="submit" class="btn btn-primary">Add Reservation</button>
+    </div>
+</form>
+
+<hr />
+
+<!-- Display validation errors, if any -->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<!-- Table to display existing reservations -->
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Group Size</th>
+            <th>Reservation Date/Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in Model.Reservations)
+        {
+            <tr>
+                <td>@res.CustomerFName</td>
+                <td>@res.CustomerLName</td>
+                <td>@res.GroupTotal</td>
+                <td>@res.DateTime.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>
