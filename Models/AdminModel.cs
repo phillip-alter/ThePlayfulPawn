@@ -19,6 +19,7 @@ namespace ThePlayfulPawn.Models
         {
             _context = context;
             Customers = _context.Customers.ToList();
+            Addresses = _context.Addresses.ToList();
             
         }
     }

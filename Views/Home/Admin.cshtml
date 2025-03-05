@@ -2,63 +2,82 @@
     ViewData["Title"] = "Admin Page";
 }
 
-
-<!-- Customer Lookup Form-->
-@model AdminModel
-
 <div>
-    <h1 class="mt-2">Customer Search</h1>
+    <h1 class="mt-2">Customer and Address Search</h1>
 </div>
 
 <form class="row g-3 mt-2" method="get">
-
-  <div class="col-md-3">
-    <input type="text" class="form-control" id="customerFirstName" placeholder="First Name" name="firstName" >
-  </div>
-  <div class="col-md-3">
-    <input type="text" class="form-control" id="customerLastName" placeholder="Last Name" name="lastName">
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Search</button>
-  </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="customerFirstName" placeholder="First Name" name="firstName">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="customerLastName" placeholder="Last Name" name="lastName">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressLine1" placeholder="Address Line 1" name="Line1">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressLine2" placeholder="Address Line 2" name="Line2">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressState" placeholder="State" name="State">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressCity" placeholder="City" name="City">
+    </div>
+    <div class="col-md-3">
+        <input type="number" class="form-control" id="addressZipCode" placeholder="Zip Code" name="ZipCode">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressPhone" placeholder="Phone Number" name="Phone">
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
 </form>
 
-
+<h2>Customers</h2>
 <table class="table table-dark table-striped table-bordered">
     <thead>
-        <th>
-            First Name
-        </th>
-        <th>
-            Last Name
-        </th>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
     </thead>
     <tbody>
-        @{
-            foreach (var customer in @Model.Customers)
-            {
-                <tr>
-                    <td>
-                        @customer.FirstName
-                    </td>
-                    <td>
-                        @customer.LastName
-                    </td>
-                </tr>
-            }
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+            </tr>
         }
     </tbody>
 </table>
 
-
-<!-- old display -->
-@* @foreach(var customer in @Model.Customers){
-  <p>@customer.FirstName @customer.LastName</p>
-} *@
-
-
-
-
-<div>
-    <h1 class="mt-2">Address Search</h1>
-</div>
+<h2>Addresses</h2>
+<table class="table table-dark table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Line1</th>
+            <th>Line2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>ZipCode</th>
+            <th>Phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var address in Model.Addresses)
+        {
+            <tr>
+                <td>@address.Line1</td>
+                <td>@address.Line2</td>
+                <td>@address.City</td>
+                <td>@address.State</td>
+                <td>@address.ZipCode</td>
+                <td>@address.Phone</td>
+            </tr>
+        }
+    </tbody>
+</table>
