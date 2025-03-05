@@ -40,60 +40,113 @@ public class HomeController : Controller
 
 
     [HttpGet]
-    public IActionResult Admin(string firstName, string lastName, string Line1, string Line2, string State, string City, int? ZipCode, string Phone)
+    public IActionResult Admin(string firstName, string lastName, string Line1, string Line2, string State, string City, int? ZipCode, string Phone, string vendorName, string contactFirst, string contactLast) // Added vendor parameters
     {
         AdminModel model = new AdminModel(_context);
 
-        // Perform the join and filtering
-        var query = _context.Customers.Join(
+        // Customer and Address Lookup
+        var customerQuery = _context.Customers.Join(
             _context.Addresses,
-            customer => customer.AddressId, // Assuming AddressId is the foreign key in Customer
+            customer => customer.AddressId,
             address => address.AddressId,
             (customer, address) => new { Customer = customer, Address = address });
 
-        // Apply filters
+        // Apply Customer Filters
         if (!string.IsNullOrEmpty(firstName))
         {
-            query = query.Where(x => x.Customer.FirstName.ToLower() == firstName.ToLower());
+            customerQuery = customerQuery.Where(x => x.Customer.FirstName.ToLower() == firstName.ToLower());
         }
         if (!string.IsNullOrEmpty(lastName))
         {
-            query = query.Where(x => x.Customer.LastName.ToLower() == lastName.ToLower());
+            customerQuery = customerQuery.Where(x => x.Customer.LastName.ToLower() == lastName.ToLower());
         }
         if (!string.IsNullOrEmpty(Line1))
         {
-            query = query.Where(x => x.Address.Line1.ToLower() == Line1.ToLower());
+            customerQuery = customerQuery.Where(x => x.Address.Line1.ToLower() == Line1.ToLower());
         }
         if (!string.IsNullOrEmpty(Line2))
         {
-            query = query.Where(x => x.Address.Line2.ToLower() == Line2.ToLower());
+            customerQuery = customerQuery.Where(x => x.Address.Line2.ToLower() == Line2.ToLower());
         }
         if (!string.IsNullOrEmpty(State))
         {
-            query = query.Where(x => x.Address.State.ToLower() == State.ToLower());
+            customerQuery = customerQuery.Where(x => x.Address.State.ToLower() == State.ToLower());
         }
         if (!string.IsNullOrEmpty(City))
         {
-            query = query.Where(x => x.Address.City.ToLower() == City.ToLower());
+            customerQuery = customerQuery.Where(x => x.Address.City.ToLower() == City.ToLower());
         }
         if (ZipCode.HasValue)
         {
-            query = query.Where(x => x.Address.ZipCode == ZipCode.Value);
+            customerQuery = customerQuery.Where(x => x.Address.ZipCode == ZipCode.Value);
         }
         if (!string.IsNullOrEmpty(Phone))
         {
-            query = query.Where(x => x.Address.Phone.ToLower() == Phone.ToLower());
+            customerQuery = customerQuery.Where(x => x.Address.Phone.ToLower() == Phone.ToLower());
         }
 
-        // Project the results into Customer objects with the associated Address
-        var results = query.Select(x => x.Customer).ToList();
+        var customerResults = customerQuery.Select(x => x.Customer).ToList();
 
         if (string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(Line1) && string.IsNullOrEmpty(Line2) && string.IsNullOrEmpty(State) && string.IsNullOrEmpty(City) && !ZipCode.HasValue && string.IsNullOrEmpty(Phone))
         {
-            results = new List<Customer>();
+            customerResults = new List<Customer>();
         }
 
-        model.Customers = results;
+        model.Customers = customerResults;
+
+        // Vendor and Address Lookup
+        var vendorQuery = _context.Vendors.Join(
+            _context.Addresses,
+            vendor => vendor.VendorAddressID, // VendorAddressID is now an int
+            address => address.AddressId,
+            (vendor, address) => new { Vendor = vendor, Address = address });
+
+        // Apply Vendor Filters
+        if (!string.IsNullOrEmpty(vendorName))
+        {
+            vendorQuery = vendorQuery.Where(x => x.Vendor.VendorName.ToLower() == vendorName.ToLower());
+        }
+        if (!string.IsNullOrEmpty(contactFirst))
+        {
+            vendorQuery = vendorQuery.Where(x => x.Vendor.ContactFirst.ToLower() == contactFirst.ToLower());
+        }
+        if (!string.IsNullOrEmpty(contactLast))
+        {
+            vendorQuery = vendorQuery.Where(x => x.Vendor.ContactLast.ToLower() == contactLast.ToLower());
+        }
+        if (!string.IsNullOrEmpty(Line1))
+        {
+            vendorQuery = vendorQuery.Where(x => x.Address.Line1.ToLower() == Line1.ToLower());
+        }
+        if (!string.IsNullOrEmpty(Line2))
+        {
+            vendorQuery = vendorQuery.Where(x => x.Address.Line2.ToLower() == Line2.ToLower());
+        }
+        if (!string.IsNullOrEmpty(State))
+        {
+            vendorQuery = vendorQuery.Where(x => x.Address.State.ToLower() == State.ToLower());
+        }
+        if (!string.IsNullOrEmpty(City))
+        {
+            vendorQuery = vendorQuery.Where(x => x.Address.City.ToLower() == City.ToLower());
+        }
+        if (ZipCode.HasValue)
+        {
+            vendorQuery = vendorQuery.Where(x => x.Address.ZipCode == ZipCode.Value);
+        }
+        if (!string.IsNullOrEmpty(Phone))
+        {
+            vendorQuery = vendorQuery.Where(x => x.Address.Phone.ToLower() == Phone.ToLower());
+        }
+
+        var vendorResults = vendorQuery.Select(x => x.Vendor).ToList();
+
+        if (string.IsNullOrEmpty(vendorName) && string.IsNullOrEmpty(contactFirst) && string.IsNullOrEmpty(contactLast) && string.IsNullOrEmpty(Line1) && string.IsNullOrEmpty(Line2) && string.IsNullOrEmpty(State) && string.IsNullOrEmpty(City) && !ZipCode.HasValue && string.IsNullOrEmpty(Phone))
+        {
+            vendorResults = new List<Vendor>();
+        }
+
+        model.Vendors = vendorResults;
 
         return View("Admin", model);
     }
