@@ -9,6 +9,7 @@ namespace ThePlayfulPawn.Data
         public int VendorAddressID { get; set; }
         public string ContactFirst { get; set; } = string.Empty;
         public string ContactLast { get; set; } = string.Empty;
+        public Address? Address { get; set; } // Add this line (FOR CRUD LINKING)
 
     }
 }

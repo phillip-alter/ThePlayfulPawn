@@ -26,12 +26,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\brama\OneDrive\Documents\WOUCS\cs364-group-project-playfulpawn
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/brama/OneDrive/Documents/WOUCS/cs364-group-project-playfulpawn/Views/Home/AddCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZGRDdXN0b21lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/brama/OneDrive/Documents/WOUCS/cs364-group-project-playfulpawn/Views/Home/AddVendor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZGRWZW5kb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/brama/OneDrive/Documents/WOUCS/cs364-group-project-playfulpawn/Views/Home/Admin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/brama/OneDrive/Documents/WOUCS/cs364-group-project-playfulpawn/Views/Home/BGSearch.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCR1NlYXJjaC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/brama/OneDrive/Documents/WOUCS/cs364-group-project-playfulpawn/Views/Home/EditCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0Q3VzdG9tZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/brama/OneDrive/Documents/WOUCS/cs364-group-project-playfulpawn/Views/Home/EditVendor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0VmVuZG9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/brama/OneDrive/Documents/WOUCS/cs364-group-project-playfulpawn/Views/Home/Index.cshtml]

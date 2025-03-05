@@ -1,0 +1,54 @@
+
+@{
+    ViewData["Title"] = "Edit Vendor";
+    var address = ViewBag.Address as ThePlayfulPawn.Data.Address;
+}
+
+@using ThePlayfulPawn.Data
+@model ThePlayfulPawn.Data.Vendor
+
+<h2>Edit Vendor</h2>
+
+<form asp-action="EditVendor" method="post" class="row g-3">
+    <input type="hidden" asp-for="VendorId" />
+
+    <div class="col-md-6">
+        <label asp-for="VendorName" class="form-label">Vendor Name</label>
+        <input asp-for="VendorName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="ContactFirst" class="form-label">Contact First Name</label>
+        <input asp-for="ContactFirst" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="ContactLast" class="form-label">Contact Last Name</label>
+        <input asp-for="ContactLast" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Address Line 1</label>
+        <input name="Line1" value="@address?.Line1" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Address Line 2</label>
+        <input name="Line2" value="@address?.Line2" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">City</label>
+        <input name="City" value="@address?.City" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">State</label>
+        <input name="State" value="@address?.State" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Zip Code</label>
+        <input name="ZipCode" value="@address?.ZipCode" type="number" class="form-control" />
+    </div>
+    <div class="col-md-12">
+        <label class="form-label">Phone Number</label>
+        <input name="Phone" value="@address?.Phone" class="form-control" />
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+</form>

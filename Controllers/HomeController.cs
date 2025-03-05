@@ -180,9 +180,13 @@ public class HomeController : Controller
     public IActionResult EditCustomer(int id)
     {
         var customer = _context.Customers.Find(id);
+        if (customer == null)
+        {
+            return NotFound();
+        }
         var address = _context.Addresses.Find(customer.AddressId);
 
-        if (customer == null || address == null)
+        if (address == null)
         {
             return NotFound();
         }
@@ -194,8 +198,26 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult EditCustomer(Customer customer, Address address)
     {
-        _context.Addresses.Update(address);
+        // Retrieve the existing address from the database
+        var existingAddress = _context.Addresses.Find(customer.AddressId);
+
+        if (existingAddress == null)
+        {
+            return NotFound(); // Or handle the error appropriately
+        }
+
+        // Update the properties of the existing address
+        existingAddress.Line1 = address.Line1;
+        existingAddress.Line2 = address.Line2;
+        existingAddress.City = address.City;
+        existingAddress.State = address.State;
+        existingAddress.ZipCode = address.ZipCode;
+        existingAddress.Phone = address.Phone;
+
+        // Update customer properties.
         _context.Customers.Update(customer);
+
+        // Save the changes to the database
         _context.SaveChanges();
 
         return RedirectToAction("Admin");
@@ -209,12 +231,10 @@ public class HomeController : Controller
         {
             return NotFound();
         }
-        var address = _context.Addresses.Find(customer.AddressId);
 
         _context.Customers.Remove(customer);
-        _context.Addresses.Remove(address);
-
         _context.SaveChanges();
+
         return RedirectToAction("Admin");
     }
 
@@ -245,9 +265,13 @@ public class HomeController : Controller
     public IActionResult EditVendor(int id)
     {
         var vendor = _context.Vendors.Find(id);
+        if (vendor == null)
+        {
+            return NotFound();
+        }
         var address = _context.Addresses.Find(vendor.VendorAddressID);
 
-        if (vendor == null || address == null)
+        if (address == null)
         {
             return NotFound();
         }
@@ -259,8 +283,26 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult EditVendor(Vendor vendor, Address address)
     {
-        _context.Addresses.Update(address);
+        // Retrieve the existing address from the database
+        var existingAddress = _context.Addresses.Find(vendor.VendorAddressID);
+
+        if (existingAddress == null)
+        {
+            return NotFound(); // Or handle the error appropriately
+        }
+
+        // Update the properties of the existing address
+        existingAddress.Line1 = address.Line1;
+        existingAddress.Line2 = address.Line2;
+        existingAddress.City = address.City;
+        existingAddress.State = address.State;
+        existingAddress.ZipCode = address.ZipCode;
+        existingAddress.Phone = address.Phone;
+
+        // Update vendor properties.
         _context.Vendors.Update(vendor);
+
+        // Save the changes to the database
         _context.SaveChanges();
 
         return RedirectToAction("Admin");
@@ -274,16 +316,10 @@ public class HomeController : Controller
         {
             return NotFound();
         }
-        var address = _context.Addresses.Find(vendor.VendorAddressID);
-        if (address == null)
-        {
-            return NotFound();
-        }
 
         _context.Vendors.Remove(vendor);
-        _context.Addresses.Remove(address);
-
         _context.SaveChanges();
+
         return RedirectToAction("Admin");
     }
 
