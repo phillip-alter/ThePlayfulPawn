@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj": {}
+    "C:\\Users\\brama\\OneDrive\\Documents\\WOUCS\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj": {
+    "C:\\Users\\brama\\OneDrive\\Documents\\WOUCS\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj",
+        "projectUniqueName": "C:\\Users\\brama\\OneDrive\\Documents\\WOUCS\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj",
         "projectName": "ThePlayfulPawn",
-        "projectPath": "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj",
-        "packagesPath": "C:\\Users\\bubba\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bubba\\Documents\\WOUSchoolwork\\CS364\\Final\\cs364-group-project-playfulpawn\\obj\\",
+        "projectPath": "C:\\Users\\brama\\OneDrive\\Documents\\WOUCS\\cs364-group-project-playfulpawn\\ThePlayfulPawn.csproj",
+        "packagesPath": "C:\\Users\\brama\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\brama\\OneDrive\\Documents\\WOUCS\\cs364-group-project-playfulpawn\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bubba\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\brama\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"

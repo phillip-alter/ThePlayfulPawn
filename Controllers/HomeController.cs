@@ -36,20 +36,25 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public IActionResult Admin()
-    {
-        
-        return View();
-    }
-
-    [HttpPost]
     public IActionResult Admin(string firstName, string lastName)
     {
-        var customers = _context.Customers
-            .Where(x => x.FirstName == firstName && x.LastName == lastName)
+        AdminModel model = new AdminModel(_context);
+        
+        if (firstName != null)
+        {
+            model.Customers = model.Customers
+            .Where(x => x.FirstName.ToLower() == firstName.ToLower())
             .ToList();
+        }
+        if (lastName != null)
+        {
+            model.Customers = model.Customers
+            .Where(x => x.LastName.ToLower() == lastName.ToLower())
+            .ToList();
+        }
 
-        return View("Customers", customers);
+            return View("Admin", model);
+        
     }
 
     public IActionResult Reservations()
