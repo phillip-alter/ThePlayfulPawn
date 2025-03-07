@@ -6,7 +6,7 @@ namespace ThePlayfulPawn.Models
 {
     public class ReservationsModel
     {
-        public IEnumerable<ReservationsInputModel> Reservations = new List<ReservationsInputModel>();
-
+        public IEnumerable<Reservation> Reservations {get;set;} = new List<Reservation>();
+        public IEnumerable<Customer> Customers {get;set;} = new List<Customer>();
     }
 }
