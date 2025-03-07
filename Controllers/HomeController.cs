@@ -257,51 +257,35 @@ public class HomeController : Controller
 
     #endregion
 
-    /*------------------------------------------------------------------------------------------------------*/
-    // This action method handles the GET request for the Reservations page.
-    // It supports searching for reservations by the customer's first and last name.
     [HttpGet]
     public IActionResult Reservations(string? searchFName, string? searchLName, DateTime? searchDate)
     {
-        // It creates a model to hold the reservations
-        var model = new ReservationsModel();
-
-        // Gets all reservations with customer details
-        var query = from r in _context.Reservations
-                    join c in _context.Customers on r.CustomerId equals c.CustomerId
-                    select new ReservationsInputModel
-                    {
-                        CustomerFName = c.FirstName,
-                        CustomerLName = c.LastName,
-                        GroupTotal = r.GroupTotal,
-                        DateTime = r.DateTime
-                    };
-
-        // Filter by first and last name if provided
+        ReservationsModel model = new ReservationsModel();
+        model.Customers = _customerRepo.GetAll().ToList();
+        model.Reservations = _reservationRepo.GetAll().ToList();
+        model.Customers = model.Customers.Where(c => model.Reservations.Any(r => r.CustomerId == c.CustomerId)).ToList();
         if (!string.IsNullOrEmpty(searchFName))
         {
-            query = query.Where(res => res.CustomerFName.Contains(searchFName));
+            model.Customers = model.Customers.Where(c => c.FirstName.ToLower().Contains(searchFName.ToLower())).ToList();
         }
 
         if (!string.IsNullOrEmpty(searchLName))
         {
-            query = query.Where(res => res.CustomerLName.Contains(searchLName));
+            model.Customers = model.Customers.Where(c => c.LastName.ToLower().Contains(searchLName.ToLower())).ToList();
         }
 
-        // If a date is search that is provided thne it will filter by reservation date
         if(searchDate.HasValue){
-            query = query.Where(res => res.DateTime.Date == searchDate.Value.Date);
+            model.Reservations = model.Reservations.Where(r => r.DateTime.Date == searchDate.Value.Date).ToList();
         }
-
-        model.Reservations = query.ToList();
+        model.Customers = model.Customers.Where(c => model.Reservations.Any(r => r.CustomerId == c.CustomerId)).ToList();
         return View(model);
     }
-    // This POST method handles adding a new reservation. 
-    // It accepts the form inputs: First Name, Last Name, Reservation Date/Time, and Group Size.
+
     [HttpPost]
     public IActionResult Reservations(string fname, string lname, DateTime datetime, int grouptotal)
     {
-        var customer = _context.Customers.FirstOrDefault(c => c.FirstName == fname && c.LastName == lname);
+        List<Customer> customers = _customerRepo.GetAll().ToList();
+        var customer = customers.FirstOrDefault(c => c.FirstName == fname && c.LastName == lname);
 
         if (customer == null)
         {
@@ -317,12 +301,9 @@ public class HomeController : Controller
             GroupTotal = grouptotal,
             DateTime = datetime
         };
+        _reservationRepo.Add(reservation);
 
-        _context.Reservations.Add(reservation);
-        _context.SaveChanges();
-
-        // Redirect to the GET action to show the updated list
-        return RedirectToAction("Reservations");
+        return RedirectToAction("Index");
     }
 /*-------------------------------------------------------------------------------------------------- */
     public IActionResult Privacy()
