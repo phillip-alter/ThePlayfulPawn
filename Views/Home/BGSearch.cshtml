@@ -1,20 +1,21 @@
 @{
     ViewData["Title"] = "Board Game Search";
 }
-@model BGSearchModel
+@using ThePlayfulPawn.Data;
+@model List<Game>
 
 <div>
     <h1 class="mt-2">Board Game Search</h1>
 </div>
-<form class="row g-3 mt-2" method="post">
+<form class="row g-3 mt-2" method="get">
   <div class="col-md-6">
-    <input type="text" class="form-control" id="inputBGName" placeholder="Board Game Name" asp-for="InputBGName">
+    <input type="text" class="form-control" id="inputBGName" placeholder="Board Game Name" name="search">
   </div>
   <div class="col-md-6">
-    <input type="number" class="form-control" id="inputPlayerCount" placeholder="Max Players" min="1" max="12" asp-for="InputPlayerCount">
+    <input type="number" class="form-control" id="inputPlayerCount" placeholder="Max Players" min="1" max="12" name="playerCount">
   </div>
   <div class="col-12">
-    <button type="search" class="btn btn-primary" method="post">Search</button>
+    <button type="search" class="btn btn-primary" method="get">Search</button>
   </div>
 </form>
 <hr />
@@ -27,9 +28,6 @@
             Description
         </th>
         <th>
-            Publisher
-        </th>
-        <th>
             Max Players
         </th>
         <th>
@@ -38,7 +36,7 @@
     </thead>
     <tbody>
         @{
-            foreach (var game in @Model.Games)
+            foreach (var game in @Model)
             {
                 <tr>
                     <td>
@@ -46,9 +44,6 @@
                     </td>
                     <td>
                         @game.Description
-                    </td>
-                    <td>
-                        @Model.Vendors.FirstOrDefault(v => v.VendorId == game.VendorId)?.VendorName 
                     </td>
                     <td>
                         @game.MaxPlayerCount
