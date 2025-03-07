@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ThePlayfulPawn")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac998ab7652bd5d212502dc6f59433b6da2c1257")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2af40751c686b938390226316d8d9498cec0559")]
 [assembly: System.Reflection.AssemblyProductAttribute("ThePlayfulPawn")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ThePlayfulPawn")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
