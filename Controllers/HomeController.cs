@@ -17,9 +17,15 @@ public class HomeController : Controller
     private readonly PawnRepo<Food> _foodRepo;
     private readonly PawnRepo<Vendor> _vendorRepo;
 
-    public HomeController(PawnDbContext context, PawnRepo<Game> gameRepo)
+    public HomeController(PawnDbContext context, PawnRepo<Game> gameRepo, PawnRepo<Address> addressRepo, PawnRepo<Customer> customerRepo,
+                          PawnRepo<Reservation> reservationRepo, PawnRepo<Food> foodRepo, PawnRepo<Vendor> vendorRepo)
     {
         _gameRepo = gameRepo;
+        _addressRepo = addressRepo;
+        _customerRepo = customerRepo;
+        _reservationRepo = reservationRepo;
+        _foodRepo = foodRepo;
+        _vendorRepo = vendorRepo;
         _context = context;
     }
 
@@ -45,113 +51,55 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Admin(string firstName, string lastName, string Line1, string Line2, string State, string City, int? ZipCode, string Phone, string vendorName, string contactFirst, string contactLast) // Added vendor parameters
     {
-        AdminModel model = new AdminModel(_context);
-
+        AdminModel model = new AdminModel();
+        model.Customers = _customerRepo.GetAll().ToList();
+        model.Addresses = _addressRepo.GetAll().ToList();
+        model.Vendors = _vendorRepo.GetAll().ToList();
         
-
-
-        // var customerQuery = _context.Customers.Join(
-        //     _context.Addresses,
-        //     customer => customer.AddressId,
-        //     address => address.AddressId,
-        //     (customer, address) => new { Customer = customer, Address = address });
-
-        // Apply Customer Filters
         if (!string.IsNullOrEmpty(firstName))
         {
-            customerQuery = customerQuery.Where(x => x.Customer.FirstName.ToLower() == firstName.ToLower());
+            model.Customers = model.Customers.Where(c => c.FirstName.ToLower().Contains(firstName.ToLower())).ToList();
         }
         if (!string.IsNullOrEmpty(lastName))
         {
-            customerQuery = customerQuery.Where(x => x.Customer.LastName.ToLower() == lastName.ToLower());
+            model.Customers = model.Customers.Where(c => c.LastName.ToLower().Contains(lastName.ToLower())).ToList();
         }
         if (!string.IsNullOrEmpty(Line1))
         {
-            customerQuery = customerQuery.Where(x => x.Address.Line1.ToLower() == Line1.ToLower());
+            model.Addresses = model.Addresses.Where(a => a.Line1.ToLower().Contains(Line1.ToLower())).ToList();
         }
         if (!string.IsNullOrEmpty(Line2))
         {
-            customerQuery = customerQuery.Where(x => x.Address.Line2.ToLower() == Line2.ToLower());
+            model.Addresses = model.Addresses.Where(a => a.Line2.ToLower().Contains(Line2.ToLower())).ToList();
         }
         if (!string.IsNullOrEmpty(State))
         {
-            customerQuery = customerQuery.Where(x => x.Address.State.ToLower() == State.ToLower());
+            model.Addresses = model.Addresses.Where(a => a.State.ToLower().Contains(State.ToLower())).ToList();
         }
         if (!string.IsNullOrEmpty(City))
         {
-            customerQuery = customerQuery.Where(x => x.Address.City.ToLower() == City.ToLower());
+            model.Addresses = model.Addresses.Where(a => a.City.ToLower().Contains(City.ToLower())).ToList();
         }
         if (ZipCode.HasValue)
         {
-            customerQuery = customerQuery.Where(x => x.Address.ZipCode == ZipCode.Value);
+            model.Addresses = model.Addresses.Where(a => a.ZipCode == ZipCode).ToList();
         }
         if (!string.IsNullOrEmpty(Phone))
         {
-            customerQuery = customerQuery.Where(x => x.Address.Phone.ToLower() == Phone.ToLower());
+            model.Addresses = model.Addresses.Where(a => a.Phone.ToLower().Contains(Line1.ToLower())).ToList();
         }
-
-        var customerResults = customerQuery.Select(x => x.Customer).ToList();
-
-        if (string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(Line1) && string.IsNullOrEmpty(Line2) && string.IsNullOrEmpty(State) && string.IsNullOrEmpty(City) && !ZipCode.HasValue && string.IsNullOrEmpty(Phone))
-        {
-            customerResults = new List<Customer>();
-        }
-
-        model.Customers = customerResults;
-
-        // Vendor and Address Lookup
-        var vendorQuery = _context.Vendors.Join(
-            _context.Addresses,
-            vendor => vendor.VendorAddressID, // VendorAddressID is now an int
-            address => address.AddressId,
-            (vendor, address) => new { Vendor = vendor, Address = address });
-
-        // Apply Vendor Filters
         if (!string.IsNullOrEmpty(vendorName))
         {
-            vendorQuery = vendorQuery.Where(x => x.Vendor.VendorName.ToLower() == vendorName.ToLower());
+            model.Vendors = model.Vendors.Where(c => c.VendorName.ToLower().Contains(vendorName.ToLower())).ToList();
         }
         if (!string.IsNullOrEmpty(contactFirst))
         {
-            vendorQuery = vendorQuery.Where(x => x.Vendor.ContactFirst.ToLower() == contactFirst.ToLower());
+            model.Vendors = model.Vendors.Where(c => c.ContactFirst.ToLower().Contains(contactFirst.ToLower())).ToList();
         }
         if (!string.IsNullOrEmpty(contactLast))
         {
-            vendorQuery = vendorQuery.Where(x => x.Vendor.ContactLast.ToLower() == contactLast.ToLower());
+            model.Vendors = model.Vendors.Where(c => c.ContactLast.ToLower().Contains(contactLast.ToLower())).ToList();
         }
-        if (!string.IsNullOrEmpty(Line1))
-        {
-            vendorQuery = vendorQuery.Where(x => x.Address.Line1.ToLower() == Line1.ToLower());
-        }
-        if (!string.IsNullOrEmpty(Line2))
-        {
-            vendorQuery = vendorQuery.Where(x => x.Address.Line2.ToLower() == Line2.ToLower());
-        }
-        if (!string.IsNullOrEmpty(State))
-        {
-            vendorQuery = vendorQuery.Where(x => x.Address.State.ToLower() == State.ToLower());
-        }
-        if (!string.IsNullOrEmpty(City))
-        {
-            vendorQuery = vendorQuery.Where(x => x.Address.City.ToLower() == City.ToLower());
-        }
-        if (ZipCode.HasValue)
-        {
-            vendorQuery = vendorQuery.Where(x => x.Address.ZipCode == ZipCode.Value);
-        }
-        if (!string.IsNullOrEmpty(Phone))
-        {
-            vendorQuery = vendorQuery.Where(x => x.Address.Phone.ToLower() == Phone.ToLower());
-        }
-
-        var vendorResults = vendorQuery.Select(x => x.Vendor).ToList();
-
-        if (string.IsNullOrEmpty(vendorName) && string.IsNullOrEmpty(contactFirst) && string.IsNullOrEmpty(contactLast) && string.IsNullOrEmpty(Line1) && string.IsNullOrEmpty(Line2) && string.IsNullOrEmpty(State) && string.IsNullOrEmpty(City) && !ZipCode.HasValue && string.IsNullOrEmpty(Phone))
-        {
-            vendorResults = new List<Vendor>();
-        }
-
-        model.Vendors = vendorResults;
 
         return View("Admin", model);
     }
@@ -171,12 +119,9 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult AddCustomer(Customer customer, Address address)
     {
-        _context.Addresses.Add(address);
-        _context.SaveChanges();
-
+        _addressRepo.Add(address);
         customer.AddressId = address.AddressId;
-        _context.Customers.Add(customer);
-        _context.SaveChanges();
+        _customerRepo.Add(customer);
 
         return RedirectToAction("Admin");
     }
@@ -184,12 +129,12 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult EditCustomer(int id)
     {
-        var customer = _context.Customers.Find(id);
+        var customer = _customerRepo.GetById(id);
         if (customer == null)
         {
             return NotFound();
         }
-        var address = _context.Addresses.Find(customer.AddressId);
+        var address = _addressRepo.GetById(customer.AddressId);
 
         if (address == null)
         {
@@ -203,15 +148,13 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult EditCustomer(Customer customer, Address address)
     {
-        // Retrieve the existing address from the database
-        var existingAddress = _context.Addresses.Find(customer.AddressId);
+        var existingAddress = _addressRepo.GetById(customer.AddressId);
 
         if (existingAddress == null)
         {
-            return NotFound(); // Or handle the error appropriately
+            return NotFound();
         }
 
-        // Update the properties of the existing address
         existingAddress.Line1 = address.Line1;
         existingAddress.Line2 = address.Line2;
         existingAddress.City = address.City;
@@ -219,26 +162,25 @@ public class HomeController : Controller
         existingAddress.ZipCode = address.ZipCode;
         existingAddress.Phone = address.Phone;
 
-        // Update customer properties.
-        _context.Customers.Update(customer);
+        _customerRepo.Update(customer);
 
-        // Save the changes to the database
-        _context.SaveChanges();
-
-        return RedirectToAction("Admin");
+        return RedirectToAction("Admin","Home");
     }
 
     [HttpGet]
     public IActionResult DeleteCustomer(int id)
     {
-        var customer = _context.Customers.Find(id);
+        var customer = _customerRepo.GetById(id);
         if (customer == null)
         {
             return NotFound();
         }
-
-        _context.Customers.Remove(customer);
-        _context.SaveChanges();
+        List<Reservation> reservations = _reservationRepo.GetAll().ToList(); 
+        foreach (var reservation in reservations)
+        {
+            _reservationRepo.Delete(reservation.ReservationId); 
+        }
+        _customerRepo.Delete(id);
 
         return RedirectToAction("Admin");
     }
@@ -256,25 +198,21 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult AddVendor(Vendor vendor, Address address)
     {
-        _context.Addresses.Add(address);
-        _context.SaveChanges();
-
+        _addressRepo.Add(address);
         vendor.VendorAddressID = address.AddressId;
-        _context.Vendors.Add(vendor);
-        _context.SaveChanges();
-
+        _vendorRepo.Add(vendor);
         return RedirectToAction("Admin");
     }
 
     [HttpGet]
     public IActionResult EditVendor(int id)
     {
-        var vendor = _context.Vendors.Find(id);
+        var vendor = _vendorRepo.GetById(id);
         if (vendor == null)
         {
             return NotFound();
         }
-        var address = _context.Addresses.Find(vendor.VendorAddressID);
+        var address = _addressRepo.GetById(id);
 
         if (address == null)
         {
@@ -288,15 +226,13 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult EditVendor(Vendor vendor, Address address)
     {
-        // Retrieve the existing address from the database
-        var existingAddress = _context.Addresses.Find(vendor.VendorAddressID);
+        var existingAddress = _addressRepo.GetById(vendor.VendorAddressID);
 
         if (existingAddress == null)
         {
-            return NotFound(); // Or handle the error appropriately
+            return NotFound(); 
         }
 
-        // Update the properties of the existing address
         existingAddress.Line1 = address.Line1;
         existingAddress.Line2 = address.Line2;
         existingAddress.City = address.City;
@@ -304,11 +240,7 @@ public class HomeController : Controller
         existingAddress.ZipCode = address.ZipCode;
         existingAddress.Phone = address.Phone;
 
-        // Update vendor properties.
-        _context.Vendors.Update(vendor);
-
-        // Save the changes to the database
-        _context.SaveChanges();
+        _vendorRepo.Update(vendor);
 
         return RedirectToAction("Admin");
     }
@@ -316,15 +248,12 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult DeleteVendor(int id)
     {
-        var vendor = _context.Vendors.Find(id);
+        var vendor = _vendorRepo.GetById(id);
         if (vendor == null)
         {
             return NotFound();
         }
-
-        _context.Vendors.Remove(vendor);
-        _context.SaveChanges();
-
+        _vendorRepo.Delete(id);
         return RedirectToAction("Admin");
     }
 
