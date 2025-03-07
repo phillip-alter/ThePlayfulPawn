@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Add Customer";
+}
+
+@using ThePlayfulPawn.Data
+@model ThePlayfulPawn.Data.Customer
+
+<h2>Add Customer</h2>
+
+<form asp-action="AddCustomer" method="post" class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="FirstName" class="form-label">First Name</label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="LastName" class="form-label">Last Name</label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Address Line 1</label>
+        <input name="Line1" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Address Line 2</label>
+        <input name="Line2" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">City</label>
+        <input name="City" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">State</label>
+        <input name="State" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Zip Code</label>
+        <input name="ZipCode" type="number" class="form-control" />
+    </div>
+    <div class="col-md-12">
+        <label class="form-label">Phone Number</label>
+        <input name="Phone" class="form-control" />
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Add Customer</button>
+    </div>
+</form>

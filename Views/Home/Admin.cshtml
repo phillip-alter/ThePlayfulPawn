@@ -1,0 +1,144 @@
+@{
+    ViewData["Title"] = "Admin Page";
+}
+
+@using System.Linq
+@using ThePlayfulPawn.Data
+
+<div>
+    <h1 class="mt-2">Customer, Vendor, and Address Search</h1>
+</div>
+
+<form class="row g-3 mt-2" method="get">
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="customerFirstName" placeholder="Customer First Name" name="firstName">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="customerLastName" placeholder="Customer Last Name" name="lastName">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="vendorName" placeholder="Vendor Name" name="vendorName">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="contactFirst" placeholder="Contact First Name" name="contactFirst">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="contactLast" placeholder="Contact Last Name" name="contactLast">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressLine1" placeholder="Address Line 1" name="Line1">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressLine2" placeholder="Address Line 2" name="Line2">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressState" placeholder="State" name="State">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressCity" placeholder="City" name="City">
+    </div>
+    <div class="col-md-3">
+        <input type="number" class="form-control" id="addressZipCode" placeholder="Zip Code" name="ZipCode">
+    </div>
+    <div class="col-md-3">
+        <input type="text" class="form-control" id="addressPhone" placeholder="Phone Number" name="Phone">
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<h2>Customers</h2>
+<a asp-action="AddCustomer" class="btn btn-primary mb-2">Add Customer</a>
+<table class="table table-dark table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Line1</th>
+            <th>Line2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>ZipCode</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            Address address = null;
+            foreach (var addr in Model.Addresses)
+            {
+                if (addr.AddressId == customer.AddressId)
+                {
+                    address = addr;
+                    break;
+                }
+            }
+            <tr>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@address?.Line1</td>
+                <td>@address?.Line2</td>
+                <td>@address?.City</td>
+                <td>@address?.State</td>
+                <td>@address?.ZipCode</td>
+                <td>@address?.Phone</td>
+                <td>
+                    <a asp-action="EditCustomer" asp-route-id="@customer.CustomerId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="DeleteCustomer" asp-route-id="@customer.CustomerId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<h2>Vendors</h2>
+<a asp-action="AddVendor" class="btn btn-primary mb-2">Add Vendor</a>
+<table class="table table-dark table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Vendor Name</th>
+            <th>Contact First</th>
+            <th>Contact Last</th>
+            <th>Line1</th>
+            <th>Line2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>ZipCode</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vendor in Model.Vendors)
+        {
+            Address address = null;
+            foreach (var addr in Model.Addresses)
+            {
+                if (addr.AddressId == vendor.VendorAddressID)
+                {
+                    address = addr;
+                    break;
+                }
+            }
+            <tr>
+                <td>@vendor.VendorName</td>
+                <td>@vendor.ContactFirst</td>
+                <td>@vendor.ContactLast</td>
+                <td>@address?.Line1</td>
+                <td>@address?.Line2</td>
+                <td>@address?.City</td>
+                <td>@address?.State</td>
+                <td>@address?.ZipCode</td>
+                <td>@address?.Phone</td>
+                <td>
+                    <a asp-action="EditVendor" asp-route-id="@vendor.VendorId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="DeleteVendor" asp-route-id="@vendor.VendorId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

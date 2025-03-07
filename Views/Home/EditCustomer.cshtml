@@ -1,0 +1,52 @@
+
+@{
+    ViewData["Title"] = "Edit Customer";
+    var address = ViewBag.Address as ThePlayfulPawn.Data.Address;
+}
+
+@using ThePlayfulPawn.Data
+@model ThePlayfulPawn.Data.Customer
+
+<h2>Edit Customer</h2>
+
+<form asp-action="EditCustomer" method="post" class="row g-3">
+    <input type="hidden" asp-for="CustomerId" />
+
+    <div class="col-md-6">
+        <label asp-for="FirstName" class="form-label">First Name</label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="LastName" class="form-label">Last Name</label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Address Line 1</label>
+        <input name="Line1" value="@address?.Line1" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Address Line 2</label>
+        <input name="Line2" value="@address?.Line2" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">City</label>
+        <input name="City" value="@address?.City" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">State</label>
+        <input name="State" value="@address?.State" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Zip Code</label>
+        <input name="ZipCode" value="@address?.ZipCode" type="number" class="form-control" />
+    </div>
+    <div class="col-md-12">
+        <label class="form-label">Phone Number</label>
+        <input name="Phone" value="@address?.Phone" class="form-control" />
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+    <input type="hidden" asp-for="CustomerId" />
+    <input type="hidden" asp-for="AddressId" />
+</form>
