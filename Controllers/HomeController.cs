@@ -9,7 +9,6 @@ namespace ThePlayfulPawn.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly PawnDbContext _context;
     private readonly PawnRepo<Game> _gameRepo;
     private readonly PawnRepo<Address> _addressRepo;
     private readonly PawnRepo<Customer> _customerRepo;
@@ -26,7 +25,6 @@ public class HomeController : Controller
         _reservationRepo = reservationRepo;
         _foodRepo = foodRepo;
         _vendorRepo = vendorRepo;
-        _context = context;
     }
 
     public IActionResult Index()
