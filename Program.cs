@@ -9,6 +9,13 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<PawnDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<PawnRepo<Game>>();
+builder.Services.AddScoped<PawnRepo<Address>>();
+builder.Services.AddScoped<PawnRepo<Customer>>();
+builder.Services.AddScoped<PawnRepo<Food>>();
+builder.Services.AddScoped<PawnRepo<Vendor>>();
+builder.Services.AddScoped<PawnRepo<Reservation>>();
+
 
 var app = builder.Build();
 
