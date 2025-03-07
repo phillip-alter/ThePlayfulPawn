@@ -10,9 +10,16 @@ namespace ThePlayfulPawn.Controllers;
 public class HomeController : Controller
 {
     private readonly PawnDbContext _context;
+    private readonly PawnRepo<Game> _gameRepo;
+    private readonly PawnRepo<Address> _addressRepo;
+    private readonly PawnRepo<Customer> _customerRepo;
+    private readonly PawnRepo<Reservation> _reservationRepo;
+    private readonly PawnRepo<Food> _foodRepo;
+    private readonly PawnRepo<Vendor> _vendorRepo;
 
-    public HomeController(PawnDbContext context)
+    public HomeController(PawnDbContext context, PawnRepo<Game> gameRepo)
     {
+        _gameRepo = gameRepo;
         _context = context;
     }
 
@@ -22,22 +29,17 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public IActionResult BGSearch()
+    public IActionResult BGSearch(string? search, int? playerCount)
     {
-        BGSearchModel model = new BGSearchModel(null, null, _context);
-        return View(model);
+        List<Game> bgList = _gameRepo.GetAll().ToList();
+        if (!search.IsNullOrEmpty()){
+            bgList = bgList.Where(g => g.GameName.ToLower().Contains(search)).ToList();
+        }
+        if (playerCount != null){
+            bgList = bgList.Where(g => g.MaxPlayerCount <= playerCount).ToList();
+        }
+        return View(bgList);
     }
-
-    [HttpPost]
-    public IActionResult BGSearch(string? inputBGName, int? inputPlayerCount)
-    {
-        BGSearchModel model = new BGSearchModel(inputBGName, inputPlayerCount, _context);
-        model.Search();
-        return View("BGSearch", model);
-    }
-
-
-
 
 
     [HttpGet]
@@ -45,12 +47,14 @@ public class HomeController : Controller
     {
         AdminModel model = new AdminModel(_context);
 
-        // Customer and Address Lookup
-        var customerQuery = _context.Customers.Join(
-            _context.Addresses,
-            customer => customer.AddressId,
-            address => address.AddressId,
-            (customer, address) => new { Customer = customer, Address = address });
+        
+
+
+        // var customerQuery = _context.Customers.Join(
+        //     _context.Addresses,
+        //     customer => customer.AddressId,
+        //     address => address.AddressId,
+        //     (customer, address) => new { Customer = customer, Address = address });
 
         // Apply Customer Filters
         if (!string.IsNullOrEmpty(firstName))
