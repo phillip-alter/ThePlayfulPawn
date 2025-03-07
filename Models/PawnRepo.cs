@@ -1,5 +1,5 @@
 using ThePlayfulPawn.Data;
-using Microsoft.EntityFrameworkCore.
+using Microsoft.EntityFrameworkCore;
 
 namespace ThePlayfulPawn.Models {
     public class PawnRepo<T> where T : class {
@@ -12,10 +12,10 @@ namespace ThePlayfulPawn.Models {
         public IEnumerable<T> GetAll() => _dbSet.ToList();
         public T GetById (int id) => _dbSet.Find(id);
         public void Add(T item) 
-        [
+        {
             _dbSet.Add(item);
             _context.SaveChanges();
-        ]
+        }
         public void Update(T item){
             _dbSet.Update(item);
             _context.SaveChanges();
@@ -24,7 +24,7 @@ namespace ThePlayfulPawn.Models {
             var item = _dbSet.Find(id);
             if (item != null){
                 _dbSet.Remove(item);
-                _context.SaveChanges()
+                _context.SaveChanges();
             }
         }
     }
